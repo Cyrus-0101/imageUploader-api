@@ -7,6 +7,9 @@ Make sure a mongo connection is running in the background. Later versions of mon
 
 The frontend is at https://github.com/Toxic254/imageUploader-Angular, after following the steps below, the code will be up and running.
 
+Create config.env in the root directory
+    In the file add AZURE_STORAGE_CONNECTION_STRING=your azure connection string
+
 Navigate to the express directory
 	Run: npm install
 	Run: nodemon
@@ -14,6 +17,8 @@ Navigate to the express directory
 Navigate to the angular directory
 	Run: npm install
 	Run: ng serve
+
+
 
 
 

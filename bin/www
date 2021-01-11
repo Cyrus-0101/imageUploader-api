@@ -1,8 +1,11 @@
 #!/usr/bin/env node
-
+const dotenv = require('dotenv');
+dotenv.config({ path: './config.env' });
 /**
  * Module dependencies.
  */
+//reading .env fle to nodeprocess
+
 
 var app = require('../app');
 var debug = require('debug')('express:server');
