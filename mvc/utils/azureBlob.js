@@ -1,9 +1,6 @@
 const { Readable } = require('stream');
 const { BlobServiceClient } = require('@azure/storage-blob');
 
-
-//Be sure to set the AZURE_STORAGE.CONNECTION_STRING IN YOUR LOCAL env settings
-
 const azureBlobString = process.env.AZURE_STORAGE_CONNECTION_STRING;
 // Create the BlobServiceClient object which will be used to create a container client
 const blobServiceClient = BlobServiceClient.fromConnectionString(
@@ -17,10 +14,10 @@ const bufferToStream = buff => {
   return stream;
 };
 
-exports.uploadImage = async (buffer, finaName, container) => {
+exports.uploadImage = async (buffer, finalName, container) => {
   const containerClient = blobServiceClient.getContainerClient(container);
   // Create a blob
-  const blockBlobClient = containerClient.getBlockBlobClient(finaName);
+  const blockBlobClient = containerClient.getBlockBlobClient(finalName);
   const blobOptions = { blobHTTPHeaders: { blobContentType: 'image/jpeg' } };
   return await blockBlobClient.uploadStream(
     bufferToStream(buffer),
@@ -32,7 +29,7 @@ exports.uploadImage = async (buffer, finaName, container) => {
 
 exports.deleteBlob = async (blob, container) => {
   const containerClient = blobServiceClient.getContainerClient(container);
-  // Create a blob
+  // Delete a blob
   const blockBlobClient = containerClient.getBlockBlobClient(blob);
   return await blockBlobClient.deleteIfExists({ deleteSnapshots: 'include' });
 };
