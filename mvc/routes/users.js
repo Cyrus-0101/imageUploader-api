@@ -4,7 +4,6 @@ const multer = require('multer');
 const sharp = require('sharp');
 const { v4 } = require('uuid');
 
-const User = mongoose.model("User");
 const azureBlob = require('../utils/azureBlob');
 
 const storage = multer.memoryStorage()
@@ -18,7 +17,7 @@ const resizeImages = async (req, res, next) => {
   if (!req.file) return next();
   
   // Check if there is a file with name image
-  const imageFilename = `bonga-messenger-image-${Date.now()}-${v4()}.jpeg`;
+  const imageFilename = `bonga-app-image-${Date.now()}-${v4()}.jpeg`;
   const buffer = await sharp(req.file.buffer)
     .resize(2000, 1333)
     .toFormat('jpeg')
@@ -36,6 +35,8 @@ const resizeImages = async (req, res, next) => {
 router.post('/upload', upload.single('image'), resizeImages,  function(req, res) {
 
   let image = req.file.fieldname
+
+  console.log(image)
 
   return res.send(image);
 	
