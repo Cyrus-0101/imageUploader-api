@@ -32,11 +32,9 @@ const resizeImages = async (req, res, next) => {
 
 //You have used upload.single and this mean the route can only accept a single image 
 //another option would have been to use upload.fields([])
-router.post('/upload', upload.single('image'), resizeImages,  function(req, res) {
+router.post('/upload', upload.single('picture'), resizeImages,  function(req, res) {
 
   let image = req.file.fieldname
-
-  console.log(image)
 
   return res.send(image);
 	
